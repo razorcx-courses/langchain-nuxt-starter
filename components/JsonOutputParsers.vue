@@ -1,8 +1,6 @@
 <template></template>
 
 <script setup>
-import { onMounted } from "vue";
-
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 // import { JsonOutputToolsParser } from "langchain/output_parsers";
 import { JsonOutputKeyToolsParser } from "langchain/output_parsers";

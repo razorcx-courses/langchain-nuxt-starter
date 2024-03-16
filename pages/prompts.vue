@@ -1,5 +1,5 @@
 <template>
-  <div class="font-mono">
+  <div>
     <Nav></Nav>
     <Hero></Hero>
     <Prompts></Prompts>

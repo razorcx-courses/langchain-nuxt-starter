@@ -24,7 +24,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { getJokeResponse } from "../lib/jokes";
 
 const chatWindowTitle = ref("Prompt Template Schema Example");

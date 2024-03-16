@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
 import { simplePromptTemplateExample } from "../lib/prompts";
 import {
   noInputPromptTemplateExample,

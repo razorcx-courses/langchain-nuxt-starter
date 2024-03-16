@@ -12,7 +12,7 @@
       <a href="https://js.langchain.com/docs/expression_language/cookbook"
         ><p>LangChain</p></a
       >
-      <a href="https://vuejs.org/guide/introduction.html"><p>Vue</p></a>
+      <a href="https://nuxt.com/"><p>Nuxt</p></a>
       <a href="https://tailwindcss.com/"><p>TailwindCSS</p></a>
     </div>
     <button

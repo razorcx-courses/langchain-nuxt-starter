@@ -1,8 +1,6 @@
 <template></template>
 
 <script setup>
-import { onMounted } from "vue";
-
 import { PromptTemplate } from "@langchain/core/prompts";
 import { CommaSeparatedListOutputParser } from "@langchain/core/output_parsers";
 import { RunnableSequence } from "@langchain/core/runnables";

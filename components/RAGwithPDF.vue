@@ -35,8 +35,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 import { PromptTemplate } from "@langchain/core/prompts";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { chatOpenAIModel as model } from "../lib/chatOpenAI";

@@ -2,8 +2,6 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-
 import {
   ChatPromptTemplate,
 } from "@langchain/core/prompts";

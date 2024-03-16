@@ -8,7 +8,7 @@
     </h2>
     <div class="flex justify-between items-center gap-5">
       <p class="text-xs">
-        <span class="text-white font-bold">LangChain | Vue | TailwindCSS</span>
+        <span class="text-white font-bold">LangChain | Nuxt | TailwindCSS</span>
       </p>
     </div>
   </footer>
