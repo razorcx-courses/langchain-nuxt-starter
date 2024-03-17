@@ -1,51 +1,33 @@
-<template></template>
+<template>
+  <ChatBox
+    :response="response"
+    :chatWindowTitle="chatWindowTitle"
+    :chatWindowDesciption="chatWindowDesciption"
+    v-model="modelValue"
+    @getResponse="onGetResponse"
+  >
+    <template v-if="response">
+      <p>{{ response }}</p>
+    </template>
+  </ChatBox>
+</template>
 
 <script setup>
-import {
-  ChatPromptTemplate,
-  FewShotChatMessagePromptTemplate,
-} from "@langchain/core/prompts";
+const chatWindowTitle = ref("Few Shot Message Prompt Template Example");
+const chatWindowDesciption = ref("Rephase human query");
+const response = ref();
+const modelValue = ref("Why do cats wear clothes?");
 
-import { StringOutputParser } from "@langchain/core/output_parsers";
-import { chatOpenAIModel as model } from "../lib/chatOpenAI";
+const onGetResponse = async () => {
+  const { data } = await useFetch(
+    "/api/fewshot/rephrase?human=" + modelValue.value
+  );
 
-const fewShotPrompting = async () => {
-  const examples = [
-    {
-      input: "Could the members of The Police perform lawful arrests?",
-      output: "what can the members of The Police do?",
-    },
-    {
-      input: "Jan Sindel's was born in what country?",
-      output: "what is Jan Sindel's personal history?",
-    },
-  ];
+  const { message, status } = data.value;
+  response.value = message;
 
-  const examplePrompt = ChatPromptTemplate.fromTemplate(`Human: {input}
-AI: {output}`);
-
-  const fewShotPrompt = new FewShotChatMessagePromptTemplate({
-    prefix:
-      "Rephrase the users query to be more general, using the following examples",
-    suffix: "Human: {input}",
-    examplePrompt,
-    examples,
-    inputVariables: ["input"],
-  });
-
-  const formattedPrompt = await fewShotPrompt.format({
-    input: "Why do cats wear clothing?",
-  });
-
-  const stringParser = new StringOutputParser();
-
-  const result = await model.pipe(stringParser).invoke(formattedPrompt);
-
-  return result;
+  if (status !== "success") {
+    response.value = status;
+  }
 };
-
-onMounted(async () => {
-  const result = await fewShotPrompting();
-  console.log(result);
-});
 </script>
