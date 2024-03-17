@@ -59,7 +59,7 @@ const multiInputPromptTemplateExample = async (template, input1, input2) => {
 
   const result = await chain.invoke({
     adjective: input1,
-    content: input2,
+    noun: input2,
     format_instructions: stringParser.getFormatInstructions(),
   });
 

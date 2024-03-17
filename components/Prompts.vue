@@ -13,39 +13,34 @@
 </template>
 
 <script setup>
-import { simplePromptTemplateExample } from "../lib/prompts";
-import {
-  noInputPromptTemplateExample,
-  oneInputPromptTemplateExample,
-  multiInputPromptTemplateExample,
-} from "../lib/prompts";
-
 const chatWindowTitle = ref("Simple Prompt Window Example");
 const chatWindowDesciption = ref("Company Name from {productType}");
 const response = ref();
 const modelValue = ref("boxes");
 
+const endpoints = useApiEndpoints();
+
 const onGetResponse = async () => {
-  response.value = await simplePromptTemplateExample(modelValue.value);
+  const { data } = await useFetch(endpoints.prompts.simple(modelValue.value));
+  response.value = data.value;
   console.log(response.value);
 };
 
-onMounted(async () => {
-  let template = "Tell me a joke.";
-  const noInput = await noInputPromptTemplateExample(template);
+let template = "Tell me a joke.";
+const { data: noInput } = await useFetch(endpoints.prompts.noInput(template));
 
-  template = "Tell me a {adjective} joke.";
-  const oneInput = await oneInputPromptTemplateExample(template, "dog");
+let adjective = "disappointing";
+const { data: oneInput } = await useFetch(
+  endpoints.prompts.oneInput(adjective)
+);
 
-  template = "Tell me a {adjective} joke about {content}.";
-  const multiInput = await multiInputPromptTemplateExample(
-    template,
-    "sarcastic",
-    "lizard"
-  );
+let adjective2 = "sarcastic";
+let noun = "lizard";
+const { data: multiInput } = await useFetch(
+  endpoints.prompts.multiInput(adjective2, noun)
+);
 
-  console.log(noInput);
-  console.log(oneInput);
-  console.log(multiInput);
-});
+console.log("No Input:", noInput.value);
+console.log("One Input:", oneInput.value);
+console.log("Multi Input:", multiInput.value);
 </script>
