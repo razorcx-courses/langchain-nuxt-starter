@@ -1,13 +1,9 @@
-<template></template>
-
-<script setup>
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-// import { JsonOutputToolsParser } from "langchain/output_parsers";
 import { JsonOutputKeyToolsParser } from "langchain/output_parsers";
 
 import { chatOpenAIModel as model } from "../lib/chatOpenAI";
 
-const useOpenAITools = async (input) => {
+export const useJsonOutput = async (input) => {
   const properties = {
     setup: {
       type: "string",
@@ -62,10 +58,3 @@ const useOpenAITools = async (input) => {
 
   return result;
 };
-
-onMounted(async () => {
-  const input = "Large Language Models";
-  const result = await useOpenAITools(input);
-  console.log(result);
-});
-</script>
