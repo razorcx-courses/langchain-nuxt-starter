@@ -24,15 +24,17 @@
 </template>
 
 <script setup>
-import { getJokeResponse } from "../lib/jokes";
-
 const chatWindowTitle = ref("Prompt Template Schema Example");
 const chatWindowDesciption = ref("Tell a Joke about {thing}");
 const response = ref();
 const modelValue = ref("pigeon");
 
+const endpoints = useApiEndpoints();
+
 const onGetResponse = async () => {
-  response.value = await getJokeResponse(modelValue.value);
+  const { data } = await useFetch(endpoints.joke(modelValue.value));
+  response.value = data.value;
+
   console.log(response.value);
 };
 </script>
