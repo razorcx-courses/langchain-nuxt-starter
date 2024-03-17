@@ -1,41 +1,40 @@
 <template>
+  <ChatBox
+    :response="response"
+    :chatWindowTitle="chatWindowTitle"
+    :chatWindowDesciption="chatWindowDesciption"
+    v-model="modelValue"
+    @getResponse="onGetResponse"
+  >
+    <template v-if="response">
+      <p>{{ response }}</p>
+    </template>
+  </ChatBox>
 </template>
 
 <script setup>
-import {
-  ChatPromptTemplate,
-} from "@langchain/core/prompts";
+const chatWindowTitle = ref("Chat Prompt Template Example");
+const chatWindowDesciption = ref("Convert text from English to French");
+const response = ref();
+const modelValue = ref("Hello my name is Chucky.");
 
-import { RunnableSequence } from "@langchain/core/runnables";
-import { StringOutputParser } from "@langchain/core/output_parsers";
-import { chatOpenAIModel as model } from "../lib/chatOpenAI";
+const endpoint = "http://localhost:3000/api/chatprompts/convert?";
+const input_language = "input_language=english";
+const output_language = "output_language=french";
 
-const useSystemTemplate = async () => {
-  const systemTemplate =
-    "You are a helpful assistant that translates {input_language} to {output_language}.";
-  const humanTemplate = "{text}";
+const onGetResponse = async () => {
+  const text = "text=" + modelValue.value;
 
-  const chatPrompt = ChatPromptTemplate.fromMessages([
-    ["system", systemTemplate],
-    ["human", humanTemplate],
-  ]);
+  const apiEndpoint =
+    endpoint + input_language + "&" + output_language + "&" + text;
 
-  const stringParser = new StringOutputParser();
+  const { data } = await useFetch(apiEndpoint);
 
-  const chain = RunnableSequence.from([chatPrompt, model, stringParser]);
+  const { message, status } = data.value;
+  response.value = message;
 
-  const result = await chain.invoke({
-    input_language: "English",
-    output_language: "French",
-    text: "I love programming.",
-    format_instructions: stringParser.getFormatInstructions(),
-  });
-
-  return result;
+  if (status !== "success") {
+    response.value = status;
+  }
 };
-
-onMounted(async () => {
-  const result = await useSystemTemplate();
-  console.log(result);
-});
 </script>
