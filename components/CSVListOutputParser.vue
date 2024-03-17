@@ -1,36 +1,27 @@
-<template></template>
+<template>
+  <ChatBox
+    :response="response"
+    :chatWindowTitle="chatWindowTitle"
+    :chatWindowDesciption="chatWindowDesciption"
+    v-model="modelValue"
+    @getResponse="onGetResponse"
+  >
+    <template v-if="response">
+      <p>{{ response }}</p>
+    </template>
+  </ChatBox>
+</template>
 
 <script setup>
-import { PromptTemplate } from "@langchain/core/prompts";
-import { CommaSeparatedListOutputParser } from "@langchain/core/output_parsers";
-import { RunnableSequence } from "@langchain/core/runnables";
+const chatWindowTitle = ref("CSV List Output Parser Example");
+const chatWindowDesciption = ref("Provide a comma seperated list.");
+const response = ref();
+const modelValue = ref("volcanoes in washington state");
 
-import { chatOpenAIModel as model } from "../lib/chatOpenAI";
+const onGetResponse = async () => {
+  const { data } = await useFetch("/api/csv/" + modelValue.value);
+  response.value = data.value;
 
-const useCsvListOutputParser = async (input) => {
-  const parser = new CommaSeparatedListOutputParser();
-
-  const chain = RunnableSequence.from([
-    PromptTemplate.fromTemplate("List five {subject}.\n{format_instructions}"),
-    model,
-    parser,
-  ]);
-
-  /*
- List five ice cream flavors.
- Your response should be a list of comma separated values, eg: `foo, bar, baz`
-*/
-  const result = await chain.invoke({
-    subject: input,
-    format_instructions: parser.getFormatInstructions(),
-  });
-
-  return result;
+  console.log(response.value);
 };
-
-onMounted(async () => {
-  const input = "ice cream flavors";
-  const result = await useCsvListOutputParser(input);
-  console.log(result);
-});
 </script>
