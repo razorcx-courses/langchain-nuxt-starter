@@ -24,6 +24,9 @@ const onGetResponse = async () => {
   );
 
   const { message, status } = data.value;
+
+  console.log(data.value);
+
   response.value = message;
 
   if (status !== "success") {

@@ -14,13 +14,13 @@
 
 <script setup>
 const chatWindowTitle = ref("Chat Prompt Template Example");
-const chatWindowDesciption = ref("Convert text from English to French");
+const chatWindowDesciption = ref("Convert text from English to Spanish");
 const response = ref();
 const modelValue = ref("Hello my name is Chucky.");
 
-const endpoint = "http://localhost:3000/api/chatprompts/convert?";
+const endpoint = "/api/chatprompts/convert?";
 const input_language = "input_language=english";
-const output_language = "output_language=french";
+const output_language = "output_language=spanish";
 
 const onGetResponse = async () => {
   const text = "text=" + modelValue.value;

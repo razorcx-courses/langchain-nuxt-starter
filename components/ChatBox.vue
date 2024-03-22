@@ -1,43 +1,47 @@
 <template>
   <ClientOnly>
-    <section id="chat" class="pt-4 px-4 h-full mb-12">
+    <section id="chat" class="pt-2 md:pt-4 px-4 pb-12 max-w-lg md:max-w-3xl mx-auto">
       <div
         id="chat-card"
-        class="flex flex-col max-w-sm md:max-w-xl mx-auto rounded-md overflow-hidden"
+        class="flex flex-col rounded-md overflow-hidden"
       >
         <div
-          class="flex flex-col justify-center items-center bg-black py-3 text-white"
+          class="flex flex-col bg-black pt-3 pb-5 text-white text-center"
         >
-          <p class="text-base">{{ chatWindowTitle }}</p>
-          <p class="text-[10px] text-pink-400">{{ chatWindowDesciption }}</p>
+          <h2 class="text-lg">{{ chatWindowTitle }}</h2>
+          <p class=" text-pink-400">{{ chatWindowDesciption }}</p>
         </div>
+
+        <!-- response -->
         <div
           id="response"
-          class="bg-gray-200 p-3 pb-0 text-white h-44 md:h-64 flex flex-col"
+          class="bg-black text-sm p-3 flex flex-col rounded-b-sm"
         >
           <div
-            class="border-l-0 border border-solid border-b-gray-400 text-xs text-gray-800 flex justify-left items-center rounded-t-sm overflow-hidden"
+          class="text-xs text-gray-800 flex justify-left items-center rounded-t-sm overflow-hidden "
           >
-            <p class="bg-gray-300 py-1 px-3 rounded-t-sm">AI Response</p>
+            <p class="py-2 px-3 rounded-t-sm bg-gray-300">AI Response</p>
           </div>
           <div
-            class="h-[140px] md:h-full p-3 bg-gray-300 rounded-b-sm text-sm overflow-x-auto overflow-y-auto text-gray-800"
+            class="h-48 md:min-h-52 p-3 bg-gray-300 rounded-b-sm text-sm overflow-x-auto overflow-y-auto text-gray-800"
           >
             <slot></slot>
           </div>
         </div>
+
+        <!-- prompt -->
         <div
           id="prompt"
-          class="bg-gray-200 text-sm p-3 flex flex-col rounded-b-sm"
+          class="bg-black text-sm p-3 flex flex-col rounded-b-sm"
         >
           <div
-            class="border-l-0 border border-solid border-b-gray-400 text-xs text-gray-800 flex justify-left items-center rounded-t-sm overflow-hidden"
+            class="text-xs text-gray-800 flex justify-left items-center rounded-t-sm overflow-hidden"
           >
-            <p class="bg-white py-1 px-3 rounded-t-sm">Human Prompt</p>
+            <p class="bg-white py-2 px-3 rounded-t-sm">Human Prompt</p>
           </div>
           <textarea
             v-model="modelValue"
-            class="text-gray-800 w-full overflow-y-auto p-3 rounded-sm"
+            class="text-gray-800 w-full overflow-y-auto p-3 rounded-b-sm"
             rows="3"
             style="resize: none"
           >

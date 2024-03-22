@@ -12,7 +12,7 @@
       </template>
     </ChatBox>
 
-    <section class="px-4">
+    <section class="px-4 pb-8">
       <div
         class="flex flex-col items-left max-w-sm md:max-w-xl mx-auto mb-16 bg-gray-200 p-6"
       >

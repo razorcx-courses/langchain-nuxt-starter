@@ -29,7 +29,7 @@ const onGetResponse = async () => {
 let template = "Tell me a joke.";
 const { data: noInput } = await useFetch(endpoints.prompts.noInput(template));
 
-let adjective = "disappointing";
+let adjective = "dog";
 const { data: oneInput } = await useFetch(
   endpoints.prompts.oneInput(adjective)
 );

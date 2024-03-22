@@ -30,7 +30,7 @@ const response = ref();
 const modelValue = ref("LLMs");
 
 const onGetResponse = async () => {
-  const { data } = await useFetch('http://localhost:3000/api/jsonoutput/' + modelValue.value);
+  const { data } = await useFetch('/api/jsonoutput/' + modelValue.value);
   response.value = data.value.message;
 
   console.log(response.value);

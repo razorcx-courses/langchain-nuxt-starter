@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 text-sm px-3 h-8 flex justify-between items-center bg-black text-white"
+    class="sticky top-0 text-xs px-3 h-8 flex justify-between items-center bg-black text-white"
   >
     <a href="/"
       ><h2 class="text-md font-medium text-pink-400">
@@ -16,7 +16,7 @@
       <a href="https://tailwindcss.com/"><p>TailwindCSS</p></a>
     </div>
     <button
-      class="flex justify-center items-center bg-pink-400 py-1 px-3 rounded-sm text-xs"
+      class="flex justify-center items-center bg-pink-400 py-1 px-3 rounded-sm"
     >
       LOGIN
     </button>
