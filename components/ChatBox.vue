@@ -64,7 +64,6 @@
 const props = defineProps({
   chatWindowTitle: String,
   chatWindowDesciption: String,
-  response: {},
 });
 defineEmits(["getResponse"]);
 const modelValue = defineModel();

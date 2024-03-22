@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    :response="response"
     :chatWindowTitle="chatWindowTitle"
     :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
@@ -19,13 +18,9 @@ const response = ref();
 const modelValue = ref("Why do cats wear clothes?");
 
 const onGetResponse = async () => {
-  const { data } = await useFetch(
+  const { message, status } = await $fetch(
     "/api/fewshot/rephrase?human=" + modelValue.value
   );
-
-  const { message, status } = data.value;
-
-  console.log(data.value);
 
   response.value = message;
 

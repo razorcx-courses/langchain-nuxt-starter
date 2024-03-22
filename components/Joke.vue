@@ -29,15 +29,8 @@ const chatWindowDesciption = ref("Tell a Joke about {thing}");
 const response = ref();
 const modelValue = ref("pigeon");
 
-const endpoints = useApiEndpoints();
-
 //https://stackoverflow.com/questions/77022535/how-to-fix-cors-error-on-3rd-party-api-call-in-nuxt-3
 const onGetResponse = async () => {
-  const { data, error } = await useFetch("api/joke/" + modelValue.value);
-  response.value = data.value;
-
-  console.log(response.value);
-
-  if (error.value) console.log(response.value, error.value?.message);
+  response.value = await $fetch("api/joke/" + modelValue.value);
 };
 </script>

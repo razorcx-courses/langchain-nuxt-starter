@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    :response="response"
     :chatWindowTitle="chatWindowTitle"
     :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
@@ -30,8 +29,8 @@ const response = ref();
 const modelValue = ref("LLMs");
 
 const onGetResponse = async () => {
-  const { data } = await useFetch('/api/jsonoutput/' + modelValue.value);
-  response.value = data.value.message;
+  const { message } = await $fetch('/api/jsonoutput/' + modelValue.value);
+  response.value = message;
 
   console.log(response.value);
 };

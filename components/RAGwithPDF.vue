@@ -1,7 +1,6 @@
 <template>
   <div>
     <ChatBox
-      :response="response"
       :chatWindowTitle="chatWindowTitle"
       :chatWindowDesciption="chatWindowDesciption"
       v-model="modelValue"
@@ -51,22 +50,17 @@ const onGetResponse = async () => {
     return;
   }
 
-  const { data } = await useFetch("/api/rag/pdf", {
+  const { message, status } = await $fetch("/api/rag/pdf", {
     method: "POST",
     body: docs,
   });
 
-  const { message, status } = data.value;
   response.value = message;
 
   if (status !== "success") {
     response.value = status;
   }
 };
-
-// const readFile = async () => {
-//   console.log("File loaded.");
-// };
 
 const readFile = async () => {
   const files = file.value.files;
@@ -94,28 +88,4 @@ const readFile = async () => {
   }
 };
 
-// const readFile = async () => {
-//   const files = file.value.files;
-//   console.log("Files", files);
-//   // Check if the user has selected a file
-//   if (files && files.length > 0) {
-//     console.log("Document loaded");
-//     // Access the file
-//     const blob = files[0];
-
-//     //https://github.com/mozilla/pdf.js/issues/17245
-//     const pdfjs = await import("pdfjs-dist/legacy/build/pdf.min.mjs");
-//     const pdfjsWorker = await import(
-//       "pdfjs-dist/legacy/build/pdf.worker.min.mjs"
-//     );
-//     pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-//     const pdfLoader = new WebPDFLoader(blob, {
-//       parsedItemSeparator: "",
-//       pdfjs: () => Promise.resolve(pdfjs),
-//     });
-
-//     docs = await pdfLoader.load();
-//   }
-// };
 </script>

@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    :response="response"
     :chatWindowTitle="chatWindowTitle"
     :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
@@ -28,9 +27,8 @@ const onGetResponse = async () => {
   const apiEndpoint =
     endpoint + input_language + "&" + output_language + "&" + text;
 
-  const { data } = await useFetch(apiEndpoint);
+  const { message, status } = await $fetch(apiEndpoint);
 
-  const { message, status } = data.value;
   response.value = message;
 
   if (status !== "success") {
