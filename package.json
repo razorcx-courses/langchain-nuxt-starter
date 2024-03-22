@@ -22,6 +22,8 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.11.4"
-  }
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "nuxt-security": "^1.2.2"
+  },
+  "proxy": "http://localhost:8080"
 }
