@@ -4,6 +4,13 @@
 import topLevelAwait from "vite-plugin-top-level-await";
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+    },
+  },
+  devtools: { enabled: false },
   modules: ["@nuxtjs/tailwindcss"],
   vite: {
     plugins: [
@@ -17,12 +24,18 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // The private keys which are only available within server-side
-    openApiKey: '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',  //NUXT_OPEN_API_KEY
-    upstashRedisRestUrl: '',  //NUXT_UPSTASH_REDIS_REST_URL
-    upstashRedisRestToken: '',  //NUXT_UPSTASH_REDIS_REST_TOKEN
+    upstashRedisRestUrl: process.env.NUXT_UPSTASH_REDIS_REST_URL,
+    upstashRedisRestToken: process.env.NUXT_UPSTASH_REDIS_REST_TOKEN,
+    
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiBase: '/api'
-    }
-  }
+      apiProxyBase: process.env.NUXT_API_PROXY_BASE,  //this is the proxy url
+      // apiBase: "https://langchain-nitro-backend.netlify.app/api"
+    },
+  },
+  // routeRules: {
+  //   '/api/**': {
+  //     proxy: process.env.PROXY_URL // 'http://localhost:8080/api/**' //cannot use this for runtime config
+  //   }
+  // }
 });

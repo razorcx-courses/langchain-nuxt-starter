@@ -1,7 +1,29 @@
 <template>
-  <div class="font-mono">
+  <div class="relative font-mono bg-black min-h-screen">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: "LangChain chatterBox Tutorials",
+  meta: [{ name: "description", content: "LangChain chatterBox Tutorials" }],
+  // bodyAttrs: {
+  //   class: "test",
+  // },
+  // script: [{ innerHTML: "console.log('Hello world')" }],
+  link: [
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
+      crossorigin: "",
+    },
+  ],
+});
+</script>
