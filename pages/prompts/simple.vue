@@ -2,7 +2,7 @@
   <div>
     <Nav></Nav>
     <Hero></Hero>
-    <Prompts></Prompts>
+    <SimplePrompts></SimplePrompts>
     <Footer></Footer>
   </div>
 </template>
