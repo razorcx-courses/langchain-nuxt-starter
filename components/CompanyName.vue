@@ -1,7 +1,5 @@
 <template>
-  <ChatBox
-    @getResponse="onGetResponse"
-  >
+  <ChatBox @getResponse="execute">
     <div class="flex flex-col gap-2">
       <template v-if="response">
         <div>
@@ -15,15 +13,16 @@
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Simple Prompt Template Example");
-useState('chatWindowDesciption', () =>"Company Name from {productType}");
-const modelValue = useState("humanPrompt", () => "toys");
+useState("chatWindowTitle", () => "Simple Prompt Template Example");
+useState("chatWindowDesciption", () => "Company Name from {productType}");
+const humanPrompt = useState("humanPrompt", () => "toys");
 
 const { data: response, execute } = await useAsyncData(
   "company",
-  () => $fetch("/api/prompts/simple/" + modelValue.value),
+  () => $fetch("/api/prompts/simple/" + humanPrompt.value),
   {
-    watch: [modelValue],
+    immediate: false,
+    watch: [humanPrompt],
     transform(input) {
       console.log(input);
       return {
@@ -32,20 +31,13 @@ const { data: response, execute } = await useAsyncData(
       };
     },
     getCachedData(key, nuxtApp) {
-      console.log(key, nuxtApp.payload.data[key], nuxtApp.static.data[key]);
       const data = nuxtApp.payload.data[key] || nuxtApp.static.data[key];
       if (!data) {
         return;
       }
-
       //just return for now and do refetch
       return;
     },
   }
 );
-
-const onGetResponse = async () => {
-  await execute();
-  console.log(response.value);
-};
 </script>

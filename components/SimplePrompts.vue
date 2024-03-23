@@ -1,5 +1,5 @@
 <template>
-  <ChatBox @getResponse="onGetResponse">
+  <ChatBox @getResponse="execute">
     <template v-if="jokes">
       <div>
         <p class="font-bold text-lg">useAsyncData Example</p>
@@ -12,55 +12,47 @@
 <script setup>
 useState("chatWindowTitle", () => "Simple Prompt Template Example");
 useState("chatWindowDesciption", () => "Various jokes");
-const modelValue = useState("humanPrompt", () => "dogs");
+const humanPrompt = useState("humanPrompt", () => "dogs");
 
-const jokes = ref();
+//https://nuxt.com/docs/api/composables/use-async-data
+const { data: jokes, execute } = await useAsyncData(
+  //key
+  "jokes",
+  //handler
+  async () => {
+    let template = `Tell me a joke about flying ${humanPrompt.value}.`;
+    let adjective = humanPrompt.value;
+    let adjective2 = "hilarious";
+    let noun = humanPrompt.value + "and a cat";
 
-const onGetResponse = async () => {
-  //https://nuxt.com/docs/api/composables/use-async-data
-  const { data, pending } = await useAsyncData(
-    //key
-    "jokes",
-    //handler
-    async () => {
-      let template = `Tell me a joke about flying ${modelValue.value}.`;
-      let adjective = modelValue.value;
-      let adjective2 = "hilarious";
-      let noun = modelValue.value + "and a cat";
+    const [noinput, oneinput, multiinput] = await Promise.all([
+      $fetch("/api/prompts/noinput", {
+        query: {
+          template,
+        },
+      }),
+      $fetch("/api/prompts/oneinput", {
+        query: {
+          template: "Tell me a {adjective} joke.",
+          adjective: adjective,
+        },
+      }),
+      $fetch("/api/prompts/multiinput", {
+        query: {
+          template: "Tell me a {adjective} joke about a {noun}.",
+          adjective: adjective2,
+          noun,
+        },
+      }),
+    ]);
 
-      const [noinput, oneinput, multiinput] = await Promise.all([
-        $fetch("/api/prompts/noinput", {
-          query: {
-            template,
-          },
-        }),
-        $fetch("/api/prompts/oneinput", {
-          query: {
-            template: "Tell me a {adjective} joke.",
-            adjective: adjective,
-          },
-        }),
-        $fetch("/api/prompts/multiinput", {
-          query: {
-            template: "Tell me a {adjective} joke about a {noun}.",
-            adjective: adjective2,
-            noun,
-          },
-        }),
-      ]);
-
-      return [noinput, oneinput, multiinput];
-    },
-    //options
-    {
-      immediate: true,
-      watch: false,
-      dedupe: "defer",
-    }
-  );
-
-  console.log(data.value);
-
-  jokes.value = data.value;
-};
+    return [noinput, oneinput, multiinput];
+  },
+  //options
+  {
+    immediate: false,
+    watch: false,
+    dedupe: "defer",
+  }
+);
 </script>

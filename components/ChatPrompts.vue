@@ -1,9 +1,9 @@
 <template>
   <ChatBox
-    @getResponse="onGetResponse"
+    @getResponse="execute"
   >
     <template v-if="response">
-      <p>{{ response }}</p>
+      <p>{{ response.message }}</p>
     </template>
   </ChatBox>
 </template>
@@ -11,26 +11,21 @@
 <script setup>
 useState('chatWindowTitle', () => "Chat Prompt Template Example");
 useState('chatWindowDesciption', () =>"Convert text from English to Spanish");
-const modelValue = useState("humanPrompt", () => "Hello my name is Chucky.");
+const humanPrompt = useState("humanPrompt", () => "Hello my name is Chucky.");
 
-const response = ref();
-
-const endpoint = "/api/chatprompts/convert?";
-const input_language = "input_language=english";
-const output_language = "output_language=spanish";
-
-const onGetResponse = async () => {
-  const text = "text=" + modelValue.value;
-
-  const apiEndpoint =
-    endpoint + input_language + "&" + output_language + "&" + text;
-
-  const { message, status } = await $fetch(apiEndpoint);
-
-  response.value = message;
-
-  if (status !== "success") {
-    response.value = status;
+const { data: response, execute } = await useAsyncData(
+  "chatprompts",
+  () =>
+    $fetch("/api/chatprompts/convert", {
+      query: {
+        input_language: "english",
+        output_language: "spanish",
+        text: humanPrompt.value
+      },
+    }),
+  {
+    immediate: false,
   }
-};
+);
+
 </script>

@@ -1,7 +1,5 @@
 <template>
-  <ChatBox
-    @getResponse="onGetResponse"
-  >
+  <ChatBox @getResponse="execute">
     <template v-if="response">
       <p>{{ response }}</p>
     </template>
@@ -9,21 +7,20 @@
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Few Shot Message Prompt Template Example");
-useState('chatWindowDesciption', () =>"Rephase human query");
-const modelValue = useState("humanPrompt", () => "Why do cats wear clothes?");
+useState("chatWindowTitle", () => "Few Shot Message Prompt Template Example");
+useState("chatWindowDesciption", () => "Rephase human query");
+const humanPrompt = useState("humanPrompt", () => "Why do cats wear clothes?");
 
-const response = ref();
-
-const onGetResponse = async () => {
-  const { message, status } = await $fetch(
-    "/api/fewshot/rephrase?human=" + modelValue.value
-  );
-
-  response.value = message;
-
-  if (status !== "success") {
-    response.value = status;
+const { data: response, execute } = await useAsyncData(
+  "fewshot",
+  () =>
+    $fetch("/api/fewshot/rephrase", {
+      query: {
+        human: humanPrompt.value,
+      },
+    }),
+  {
+    immediate: false,
   }
-};
+);
 </script>

@@ -1,10 +1,8 @@
 <template>
   <div>
-    <ChatBox
-      @getResponse="onGetResponse"
-    >
+    <ChatBox @getResponse="execute">
       <template v-if="response">
-        <p>{{ response }}</p>
+        <p>{{ response.message }}</p>
       </template>
     </ChatBox>
 
@@ -33,32 +31,28 @@
 <script setup>
 import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
-useState('chatWindowTitle', () => "RAG - PDF Document Memory Vector Store");
-useState('chatWindowDesciption', () =>"Ask questions about the PDF document");
-const modelValue = useState("humanPrompt", () => "Tell me about the document.");
+useState("chatWindowTitle", () => "RAG - PDF Document Memory Vector Store");
+useState("chatWindowDesciption", () => "Ask questions about the PDF document");
+const humanPrompt = useState(
+  "humanPrompt",
+  () => "Tell me about the document."
+);
 
-const response = ref();
 const file = ref(null);
 
-let docs;
+const docs = ref();
 
-const onGetResponse = async () => {
-  if (!docs) {
-    console.log("Load document and try again.");
-    return;
+const { data: response, execute } = await useAsyncData(
+  "joke",
+  () =>
+    $fetch("/api/rag/pdf", {
+      method: "POST",
+      body: { docs: docs.value, prompt: humanPrompt.value },
+    }),
+  {
+    immediate: false,
   }
-
-  const { message, status } = await $fetch("/api/rag/pdf", {
-    method: "POST",
-    body: docs,
-  });
-
-  response.value = message;
-
-  if (status !== "success") {
-    response.value = status;
-  }
-};
+);
 
 const readFile = async () => {
   const files = file.value.files;
@@ -81,9 +75,8 @@ const readFile = async () => {
       pdfjs: () => Promise.resolve(pdfjs),
     });
 
-    docs = await pdfLoader.load();
-    console.log(docs);
+    docs.value = await pdfLoader.load();
+    console.log(docs.value);
   }
 };
-
 </script>

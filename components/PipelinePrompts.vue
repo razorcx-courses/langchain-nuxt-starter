@@ -1,31 +1,29 @@
 <template>
-  <ChatBox
-    @getResponse="onGetResponse"
-  >
+  <ChatBox @getResponse="execute">
     <template v-if="response">
-      <p>{{ response }}</p>
+      <p>{{ response.message }}</p>
     </template>
   </ChatBox>
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Pipeline Prompt Template Example");
-useState('chatWindowDesciption', () =>"Ask a question");
-const modelValue = useState("humanPrompt", () => "What's your favorite social media site?");
+useState("chatWindowTitle", () => "Pipeline Prompt Template Example");
+useState("chatWindowDesciption", () => "Ask a question");
+const humanPrompt = useState(
+  "humanPrompt",
+  () => "What's your favorite social media site?"
+);
 
-const response = ref();
-
-const onGetResponse = async () => {
-  const { message, status } = await $fetch("/api/pipeline", {
-    query: {
-      ask: modelValue.value,
-    },
-  });
-
-  response.value = message;
-
-  if (status !== "success") {
-    response.value = status;
+const { data: response, execute } = await useAsyncData(
+  "pipeline",
+  () =>
+    $fetch("/api/pipeline/ask", {
+      query: {
+        human: humanPrompt.value,
+      },
+    }),
+  {
+    immediate: false,
   }
-};
+);
 </script>
