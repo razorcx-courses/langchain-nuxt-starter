@@ -1,8 +1,5 @@
 <template>
   <ChatBox
-    :response="response"
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -24,8 +21,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("Prompt Template Schema Example");
-const chatWindowDesciption = ref("Tell a Joke about {thing}");
+useState('chatWindowTitle', () => "Prompt Template Schema Example");
+useState('chatWindowDesciption', () =>"Tell a Joke about {thing}");
 const response = ref();
 const modelValue = ref("pigeon");
 

@@ -1,8 +1,6 @@
 <template>
   <div>
     <ChatBox
-      :chatWindowTitle="chatWindowTitle"
-      :chatWindowDesciption="chatWindowDesciption"
       v-model="modelValue"
       @getResponse="onGetResponse"
     >
@@ -36,8 +34,8 @@
 <script setup>
 import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
-const chatWindowTitle = ref("RAG - PDF Document Memory Vector Store");
-const chatWindowDesciption = ref("Ask questions about the PDF document");
+useState('chatWindowTitle', () => "RAG - PDF Document Memory Vector Store");
+useState('chatWindowDesciption', () =>"Ask questions about the PDF document");
 const response = ref();
 const modelValue = ref("Tell me about the document.");
 const file = ref(null);

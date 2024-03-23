@@ -1,7 +1,5 @@
 <template>
   <ChatBox
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -12,8 +10,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("Few Shot Message Prompt Template Example");
-const chatWindowDesciption = ref("Rephase human query");
+useState('chatWindowTitle', () => "Few Shot Message Prompt Template Example");
+useState('chatWindowDesciption', () =>"Rephase human query");
 const response = ref();
 const modelValue = ref("Why do cats wear clothes?");
 

@@ -8,6 +8,9 @@ import {
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { chatOpenAIModel as model } from "../lib/chatOpenAI";
 
+useState('chatWindowTitle', () => "Prompting with Functions Example");
+useState('chatWindowDesciption', () =>"Tell a joke");
+
 const promptingWithFunctions = async () => {
   const getCurrentDate = () => {
     return new Date().toISOString();

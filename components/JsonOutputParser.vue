@@ -1,7 +1,5 @@
 <template>
   <ChatBox
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -23,8 +21,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("Json Output Parser Example");
-const chatWindowDesciption = ref("Tell a Joke about {topic}");
+useState('chatWindowTitle', () => "Json Output Parser Example");
+useState('chatWindowDesciption', () =>"Tell a Joke about {topic}");
 const response = ref();
 const modelValue = ref("LLMs");
 

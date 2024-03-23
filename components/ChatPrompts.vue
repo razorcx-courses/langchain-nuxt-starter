@@ -1,7 +1,5 @@
 <template>
   <ChatBox
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -12,8 +10,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("Chat Prompt Template Example");
-const chatWindowDesciption = ref("Convert text from English to Spanish");
+useState('chatWindowTitle', () => "Chat Prompt Template Example");
+useState('chatWindowDesciption', () =>"Convert text from English to Spanish");
 const response = ref();
 const modelValue = ref("Hello my name is Chucky.");
 

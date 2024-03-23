@@ -61,10 +61,9 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  chatWindowTitle: String,
-  chatWindowDesciption: String,
-});
+const chatWindowTitle = useState('chatWindowTitle');
+const chatWindowDesciption = useState('chatWindowDesciption');
+
 defineEmits(["getResponse"]);
 const modelValue = defineModel();
 </script>

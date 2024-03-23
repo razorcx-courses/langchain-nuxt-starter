@@ -1,7 +1,5 @@
 <template>
   <ChatBox
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -12,8 +10,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("CSV List Output Parser Example");
-const chatWindowDesciption = ref("Provide a comma seperated list.");
+useState('chatWindowTitle', () => "CSV List Output Parser Example");
+useState('chatWindowDesciption', () =>"Provide a comma seperated list.");
 const response = ref();
 const modelValue = ref("volcanoes in washington state");
 

@@ -1,7 +1,5 @@
 <template>
   <ChatBox
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -12,8 +10,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("Pipeline Prompt Template Example");
-const chatWindowDesciption = ref("Ask a question");
+useState('chatWindowTitle', () => "Pipeline Prompt Template Example");
+useState('chatWindowDesciption', () =>"Ask a question");
 const response = ref();
 const modelValue = ref(`What's your favorite social media site?`);
 

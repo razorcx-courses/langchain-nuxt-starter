@@ -1,7 +1,5 @@
 <template>
   <ChatBox
-    :chatWindowTitle="chatWindowTitle"
-    :chatWindowDesciption="chatWindowDesciption"
     v-model="modelValue"
     @getResponse="onGetResponse"
   >
@@ -18,8 +16,8 @@
 </template>
 
 <script setup>
-const chatWindowTitle = ref("Simple Prompt Template Example");
-const chatWindowDesciption = ref("Company Name from {productType}");
+useState('chatWindowTitle', () => "Simple Prompt Template Example");
+useState('chatWindowDesciption', () =>"Company Name from {productType}");
 const modelValue = ref("toys");
 
 const { data: response, execute } = await useAsyncData(
