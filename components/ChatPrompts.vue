@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    v-model="modelValue"
     @getResponse="onGetResponse"
   >
     <template v-if="response">
@@ -12,8 +11,9 @@
 <script setup>
 useState('chatWindowTitle', () => "Chat Prompt Template Example");
 useState('chatWindowDesciption', () =>"Convert text from English to Spanish");
+const modelValue = useState("humanPrompt", () => "Hello my name is Chucky.");
+
 const response = ref();
-const modelValue = ref("Hello my name is Chucky.");
 
 const endpoint = "/api/chatprompts/convert?";
 const input_language = "input_language=english";

@@ -1,8 +1,5 @@
 <template>
-  <ChatBox
-    v-model="modelValue"
-    @getResponse="onGetResponse"
-  >
+  <ChatBox @getResponse="onGetResponse">
     <template v-if="jokes">
       <div>
         <p class="font-bold text-lg">useAsyncData Example</p>
@@ -13,9 +10,10 @@
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Simple Prompt Template Example");
-useState('chatWindowDesciption', () =>"Various jokes");
-const modelValue = ref("dogs");
+useState("chatWindowTitle", () => "Simple Prompt Template Example");
+useState("chatWindowDesciption", () => "Various jokes");
+const modelValue = useState("humanPrompt", () => "dogs");
+
 const jokes = ref();
 
 const onGetResponse = async () => {
@@ -57,7 +55,7 @@ const onGetResponse = async () => {
     {
       immediate: true,
       watch: false,
-      dedupe: "defer"
+      dedupe: "defer",
     }
   );
 

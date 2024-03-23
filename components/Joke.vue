@@ -1,8 +1,5 @@
 <template>
-  <ChatBox
-    v-model="modelValue"
-    @getResponse="onGetResponse"
-  >
+  <ChatBox @getResponse="onGetResponse">
     <template v-if="response">
       <p
         class="inline-flex text-[9px] bg-gray-400 text-gray-200 px-2 rounded-sm"
@@ -21,13 +18,15 @@
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Prompt Template Schema Example");
-useState('chatWindowDesciption', () =>"Tell a Joke about {thing}");
+useState("chatWindowTitle", () => "Prompt Template Schema Example");
+useState("chatWindowDesciption", () => "Tell a Joke about {thing}");
+useState("humanPrompt", () => "pigeon");
+
 const response = ref();
-const modelValue = ref("pigeon");
 
 //https://stackoverflow.com/questions/77022535/how-to-fix-cors-error-on-3rd-party-api-call-in-nuxt-3
 const onGetResponse = async () => {
-  response.value = await $fetch("api/joke/" + modelValue.value);
+  const prompt = useState("humanPrompt");
+  response.value = await $fetch("api/joke/" + prompt.value);
 };
 </script>

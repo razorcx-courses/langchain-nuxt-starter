@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    v-model="modelValue"
     @getResponse="onGetResponse"
   >
     <div class="flex flex-col gap-2">
@@ -18,7 +17,7 @@
 <script setup>
 useState('chatWindowTitle', () => "Simple Prompt Template Example");
 useState('chatWindowDesciption', () =>"Company Name from {productType}");
-const modelValue = ref("toys");
+const modelValue = useState("humanPrompt", () => "toys");
 
 const { data: response, execute } = await useAsyncData(
   "company",

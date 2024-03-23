@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    v-model="modelValue"
     @getResponse="onGetResponse"
   >
     <template v-if="response">
@@ -12,8 +11,9 @@
 <script setup>
 useState('chatWindowTitle', () => "Pipeline Prompt Template Example");
 useState('chatWindowDesciption', () =>"Ask a question");
+const modelValue = useState("humanPrompt", () => "What's your favorite social media site?");
+
 const response = ref();
-const modelValue = ref(`What's your favorite social media site?`);
 
 const onGetResponse = async () => {
   const { message, status } = await $fetch("/api/pipeline", {

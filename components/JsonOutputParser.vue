@@ -1,6 +1,5 @@
 <template>
   <ChatBox
-    v-model="modelValue"
     @getResponse="onGetResponse"
   >
     <template v-if="response">
@@ -23,8 +22,9 @@
 <script setup>
 useState('chatWindowTitle', () => "Json Output Parser Example");
 useState('chatWindowDesciption', () =>"Tell a Joke about {topic}");
+const modelValue = useState("humanPrompt", () => "LLMs");
+
 const response = ref();
-const modelValue = ref("LLMs");
 
 const onGetResponse = async () => {
   const { message } = await $fetch('/api/jsonoutput/' + modelValue.value);
