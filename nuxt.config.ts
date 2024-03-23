@@ -26,10 +26,12 @@ export default defineNuxtConfig({
     // The private keys which are only available within server-side
     upstashRedisRestUrl: process.env.NUXT_UPSTASH_REDIS_REST_URL,
     upstashRedisRestToken: process.env.NUXT_UPSTASH_REDIS_REST_TOKEN,
+    apiKey: process.env.NUXT_API_KEY,
+    apiProxyBase: process.env.NUXT_API_PROXY_BASE,
     
     // Keys within public, will be also exposed to the client-side
     public: {
-      apiProxyBase: process.env.NUXT_API_PROXY_BASE,  //this is the proxy url
+      // apiProxyBase: process.env.NUXT_API_PROXY_BASE,  //this is the proxy url
       // apiBase: "https://langchain-nitro-backend.netlify.app/api"
     },
   },
