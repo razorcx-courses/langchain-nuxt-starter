@@ -23,7 +23,7 @@ const { data: jokes, execute } = await useAsyncData(
     let template = `Tell me a joke about flying ${humanPrompt.value}.`;
     let adjective = humanPrompt.value;
     let adjective2 = "hilarious";
-    let noun = humanPrompt.value + "and a cat";
+    let noun = humanPrompt.value + " and a cat";
 
     const [noinput, oneinput, multiinput] = await Promise.all([
       $fetch("/api/prompts/noinput", {
