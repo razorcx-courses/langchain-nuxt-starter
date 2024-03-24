@@ -1,8 +1,6 @@
 <template>
   <ChatBox @getResponse="execute">
-    <template v-if="response">
-      <p>{{ response }}</p>
-    </template>
+    <Response v-if="response" :response="response"></Response>
   </ChatBox>
 </template>
 

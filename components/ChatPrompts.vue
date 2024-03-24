@@ -1,16 +1,12 @@
 <template>
-  <ChatBox
-    @getResponse="execute"
-  >
-    <template v-if="response">
-      <p>{{ response.message }}</p>
-    </template>
+  <ChatBox @getResponse="execute">
+    <Response v-if="response" :response="response.message"></Response>
   </ChatBox>
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Chat Prompt Template Example");
-useState('chatWindowDesciption', () =>"Convert text from English to Spanish");
+useState("chatWindowTitle", () => "Chat Prompt Template Example");
+useState("chatWindowDesciption", () => "Convert text from English to Spanish");
 const humanPrompt = useState("humanPrompt", () => "Hello my name is Chucky.");
 
 const { data: response, execute } = await useAsyncData(
@@ -20,12 +16,11 @@ const { data: response, execute } = await useAsyncData(
       query: {
         input_language: "english",
         output_language: "spanish",
-        text: humanPrompt.value
+        text: humanPrompt.value,
       },
     }),
   {
     immediate: false,
   }
 );
-
 </script>

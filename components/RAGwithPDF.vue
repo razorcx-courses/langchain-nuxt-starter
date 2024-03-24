@@ -1,9 +1,7 @@
 <template>
   <div>
     <ChatBox @getResponse="execute">
-      <template v-if="response">
-        <p>{{ response.message }}</p>
-      </template>
+      <Response v-if="response" :response="response.message"></Response>
     </ChatBox>
 
     <section class="px-4 pb-8">

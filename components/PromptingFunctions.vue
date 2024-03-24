@@ -1,13 +1,8 @@
 <template>
-  <ChatBox
-    @getResponse="execute"
-  >
-    <template v-if="response">
-      <p>{{ response }}</p>
-    </template>
+  <ChatBox @getResponse="execute">
+    <Response v-if="response" :response="response"></Response>
   </ChatBox>
 </template>
-
 
 <script setup>
 useState("chatWindowTitle", () => "Prompting with Functions Example");
