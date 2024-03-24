@@ -1,4 +1,4 @@
-export const useRunPage = async (page) => {
+export const useRunPage = async (page: string) => {
   const { endpoint, humanPrompt } = usePageInit(page);
 
   const { data: response, execute } = await useAsyncData(

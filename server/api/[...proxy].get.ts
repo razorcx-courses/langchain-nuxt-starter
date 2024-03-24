@@ -9,5 +9,5 @@ export default defineEventHandler(async (event) => {
   //https://stackoverflow.com/questions/77068584/how-to-change-request-headers-with-server-middleware
   Object.assign(event.node.req.headers, { Authorization: apiKey });
 
-  return proxyRequest(event, targetUrl);
+  return proxyRequest(event, targetUrl.toString());
 });

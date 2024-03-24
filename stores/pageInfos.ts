@@ -1,4 +1,12 @@
-export const pageInfo = [
+export interface IPageInfo {
+  page: string;
+  title: string;
+  description: string;
+  humanPrompt: string;
+  endpoint: string;
+}
+
+export const pageInfos: IPageInfo[] = [
   {
     page: "joke",
     title: "Prompt Template Schema Example",

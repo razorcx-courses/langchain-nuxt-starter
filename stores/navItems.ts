@@ -1,4 +1,9 @@
-export const navItems = [
+export interface INavItems {
+  title: string;
+  to: string;
+}
+
+export const navItems: INavItems[] = [
   {
     title: "LangChain",
     to: "https://js.langchain.com/docs/expression_language/cookbook",

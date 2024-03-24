@@ -1,4 +1,4 @@
-export const usePageInit = (page) => {
+export const usePageInit = (page: string) => {
   const title = useTitle();
   const description = useDescription();
   const humanPrompt = useHumanPrompt();

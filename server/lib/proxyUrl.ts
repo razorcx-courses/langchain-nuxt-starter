@@ -1,4 +1,4 @@
-export const getProxyUrl = (event) => {
+export const getProxyUrl = (event: any) => {
   const { apiProxyBase } = useRuntimeConfig(event);
 
   const path = getRouterParam(event, "proxy");
