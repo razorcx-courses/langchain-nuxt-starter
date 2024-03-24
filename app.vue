@@ -26,4 +26,20 @@ useHead({
     },
   ],
 });
+
+useState("pages", () => [
+  {
+    name: "chatprompts",
+    chatWindowTitle: "Chat Prompt Template Example",
+    chatWindowDesciption: "Convert text from English to Spanish",
+    humanPrompt: "Hello my name is Chucky.",
+    apiEndpoint: "/api/chatprompts/convert",
+    query: {
+      input_language: "english",
+      output_language: "spanish",
+      text: "",
+    },
+    immediate: false,
+  },
+]);
 </script>
