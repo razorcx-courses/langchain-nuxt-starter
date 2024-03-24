@@ -6,10 +6,8 @@
     <h2 class="text-md font-medium text-pink-400">
       chatter<span class="text-white font-bold">Box</span>
     </h2>
-    <div class="flex justify-between items-center gap-5">
-      <p class="text-text-xs">
-        <span class="text-white font-bold">LangChain | Nuxt | TailwindCSS</span>
-      </p>
+    <div class="flex justify-between items-center gap-3 md:gap-3">
+      <AppLinks></AppLinks>
     </div>
   </footer>
 </template>
