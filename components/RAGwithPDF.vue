@@ -1,7 +1,7 @@
 <template>
   <div>
     <ChatBox @getResponse="execute">
-      <Response v-if="response" :response="response.message"></Response>
+      <Response v-if="response" :response="response"></Response>
     </ChatBox>
 
     <section class="px-4 pb-8">
@@ -29,18 +29,18 @@
 <script setup>
 import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
-const route = useRoute();
-const page = computed(() => {
-  return route.params.slug.toLowerCase();
+const props = defineProps({
+  page: String,
 });
-const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const file = ref(null);
 
 const docs = ref();
 
+const { endpoint, humanPrompt } = usePageInit(props.page);
+
 const { data: response, execute } = await useAsyncData(
-  page.value,
+  props.page,
   () =>
     $fetch(endpoint, {
       method: "POST",

@@ -1,12 +1,8 @@
-export const useRunPage = async (route) => {
-  const page = computed(() => {
-    return route.params.slug.toLowerCase();
-  });
-
-  const { endpoint, humanPrompt } = usePageInit(page.value);
+export const useRunPage = async (page) => {
+  const { endpoint, humanPrompt } = usePageInit(page);
 
   const { data: response, execute } = await useAsyncData(
-    page.value,
+    page,
     () => $fetch(endpoint + humanPrompt.value),
     {
       immediate: false,

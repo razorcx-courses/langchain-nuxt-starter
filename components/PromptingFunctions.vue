@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
-const route = useRoute();
-const { response, execute } = await useRunPage(route);
+const props = defineProps({
+  page: String,
+});
+
+const { response, execute } = await useRunPage(props.page);
 </script>

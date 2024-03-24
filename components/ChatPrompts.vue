@@ -1,18 +1,18 @@
 <template>
   <ChatBox @getResponse="execute">
-    <Response v-if="response" :response="response.message"></Response>
+    <Response v-if="response" :response="response"></Response>
   </ChatBox>
 </template>
 
 <script setup>
-const route = useRoute();
-const page = computed(() => {
-  return route.params.slug.toLowerCase();
+const props = defineProps({
+  page: String,
 });
-const { endpoint, humanPrompt } = usePageInit(page.value);
+
+const { endpoint, humanPrompt } = usePageInit(props.page);
 
 const { data: response, execute } = await useAsyncData(
-  page.value,
+  props.page,
   () =>
     $fetch(endpoint, {
       query: {

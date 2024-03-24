@@ -1,26 +1,24 @@
 <template>
   <ChatBox @getResponse="execute">
-    <div class="flex flex-col gap-2">
-      <template v-if="response">
-        <div>
-          <p class="font-bold text-lg">useFetch Example</p>
-          <p class="text-bold text-pink-500 ml-2">{{ response.input }}</p>
-          <p class="text-xs ml-2">Last fetched: {{ response.fetchedAt }}</p>
-        </div>
-      </template>
-    </div>
+    <template v-if="response">
+      <div>
+        <p class="font-bold text-lg">useFetch Example</p>
+        <p class="text-bold text-pink-500 ml-2">{{ response.input }}</p>
+        <p class="text-xs ml-2">Last fetched: {{ response.fetchedAt }}</p>
+      </div>
+    </template>
   </ChatBox>
 </template>
 
 <script setup>
-const route = useRoute();
-const page = computed(() => {
-  return route.params.slug.toLowerCase();
+const props = defineProps({
+  page: String,
 });
-const { endpoint, humanPrompt } = usePageInit(page.value);
+
+const { endpoint, humanPrompt } = usePageInit(props.page);
 
 const { data: response, execute } = await useAsyncData(
-  page.value,
+  props.page,
   () => $fetch(endpoint + humanPrompt.value),
   {
     immediate: false,

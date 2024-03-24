@@ -10,13 +10,16 @@
 </template>
 
 <script setup>
-const page = "simple"
-const { humanPrompt } = usePageInit(page);
+const props = defineProps({
+  page: String,
+});
+
+const { humanPrompt } = usePageInit(props.page);
 
 //https://nuxt.com/docs/api/composables/use-async-data
 const { data: jokes, execute } = await useAsyncData(
   //key
-  page,
+  props.page,
   //handler
   async () => {
     let template = `Tell me a joke about flying ${humanPrompt.value}.`;
