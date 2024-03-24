@@ -4,6 +4,9 @@
 import topLevelAwait from "vite-plugin-top-level-await";
 
 export default defineNuxtConfig({
+
+  //todo: add build/prod/etc app settings
+  
   app: {
     head: {
       charset: "utf-8",
