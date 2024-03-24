@@ -4,7 +4,7 @@
       <Response v-if="response" :response="response"></Response>
     </ChatBox>
 
-    <section class="px-4 pb-8">
+    <section class="pb-8">
       <div
         class="flex flex-col items-left max-w-sm md:max-w-xl mx-auto mb-16 bg-gray-200 p-6"
       >
@@ -27,8 +27,6 @@
 </template>
 
 <script setup>
-import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
-
 const props = defineProps({
   page: String,
 });
@@ -51,45 +49,7 @@ const { data: response, execute } = await useAsyncData(
   }
 );
 
-//todo: check for file type is .pdf
-
 const readFile = async () => {
-  const files = file.value.files;
-
-  //upload file to server
-  const formData = new FormData();
-  formData.append(
-    "file",
-    files[0],
-    files[0].name.replaceAll(" ", "-").toLocaleLowerCase()
-  );
-
-  await $fetch("/api/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  console.log("Files", files);
-  // Check if the user has selected a file
-  if (files && files.length > 0) {
-    console.log("Document loaded");
-    // Access the file
-    const blob = files[0];
-
-    //https://github.com/mozilla/pdf.js/issues/17245
-    const pdfjs = await import("pdfjs-dist/legacy/build/pdf.min.mjs");
-    const pdfjsWorker = await import(
-      "pdfjs-dist/legacy/build/pdf.worker.min.mjs"
-    );
-    pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-    const pdfLoader = new WebPDFLoader(blob, {
-      parsedItemSeparator: "",
-      pdfjs: () => Promise.resolve(pdfjs),
-    });
-
-    docs.value = await pdfLoader.load();
-    console.log(docs.value);
-  }
+  docs.value = await readPdfFile(file.value.files);
 };
 </script>
