@@ -1,5 +1,3 @@
-import { pageInfo } from "../stores/pageInfo";
-
 export const useTitle = () => {
   return useState("chatWindowTitle", () => "Langchain | Nuxt | TailwindCSS");
 };

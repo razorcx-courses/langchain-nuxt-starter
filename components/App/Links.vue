@@ -8,6 +8,5 @@
 </template>
 
 <script setup>
-import { navItems } from "../../stores/navItems";
 const items = ref(navItems);
 </script>
