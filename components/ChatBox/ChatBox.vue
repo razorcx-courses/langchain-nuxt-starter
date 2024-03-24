@@ -1,7 +1,7 @@
 <template>
   <section
     id="chat"
-    class="pt-2 md:pt-4 px-4 pb-12 max-w-lg md:max-w-3xl mx-auto"
+    class="pt-2 md:pt-4 px-4 pb-12 md:max-w-3xl mx-auto"
   >
     <div id="chat-card" class="flex flex-col rounded-md overflow-hidden">
       <ChatBoxTitle></ChatBoxTitle>
