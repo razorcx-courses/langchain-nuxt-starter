@@ -8,6 +8,6 @@
 </template>
 
 <script setup>
-import { navItems } from "../../appdata/navItems";
+import { navItems } from "../../stores/navItems";
 const items = ref(navItems);
 </script>

@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { exampleLinks } from "../appdata/lanchainLinks"
+import { exampleLinks } from "../stores/langchainLinks"
 const title = useTitle();
 const description = useDescription();
 
