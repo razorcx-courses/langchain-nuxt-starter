@@ -8,11 +8,12 @@
       </h2></a
     >
 
-    <div class="flex justify-between items-center gap-3 md:gap-6">
+    <div class="flex justify-between items-center gap-3 md:gap-3">
       <a href="https://js.langchain.com/docs/expression_language/cookbook"
         ><p>LangChain</p></a
-      >
+      ><p>|</p>
       <a href="https://nuxt.com/"><p>Nuxt</p></a>
+      <p>|</p>
       <a href="https://tailwindcss.com/"><p>TailwindCSS</p></a>
     </div>
     <button
