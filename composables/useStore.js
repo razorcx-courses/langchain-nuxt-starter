@@ -1,4 +1,4 @@
-import { pageInfo } from "./pageInfo";
+import { pageInfo } from "../appdata/pageInfo";
 
 export const useTitle = () => {
   return useState("chatWindowTitle", () => "Langchain | Nuxt | TailwindCSS");
