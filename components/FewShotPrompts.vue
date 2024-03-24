@@ -5,14 +5,16 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Few Shot Message Prompt Template Example");
-useState("chatWindowDesciption", () => "Rephase human query");
-const humanPrompt = useState("humanPrompt", () => "Why do cats wear clothes?");
+const route = useRoute();
+const page = computed(() => {
+  return route.params.slug.toLowerCase();
+});
+const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const { data: response, execute } = await useAsyncData(
-  "fewshot",
+  page.value,
   () =>
-    $fetch("/api/fewshot/rephrase", {
+    $fetch(endpoint, {
       query: {
         human: humanPrompt.value,
       },

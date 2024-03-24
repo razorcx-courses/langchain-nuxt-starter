@@ -10,14 +10,13 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Simple Prompt Template Example");
-useState("chatWindowDesciption", () => "Various jokes");
-const humanPrompt = useState("humanPrompt", () => "dogs");
+const page = "simple"
+const { humanPrompt } = usePageInit(page);
 
 //https://nuxt.com/docs/api/composables/use-async-data
 const { data: jokes, execute } = await useAsyncData(
   //key
-  "jokes",
+  page,
   //handler
   async () => {
     let template = `Tell me a joke about flying ${humanPrompt.value}.`;

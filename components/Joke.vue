@@ -18,15 +18,6 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Prompt Template Schema Example");
-useState("chatWindowDesciption", () => "Tell a Joke about {thing}");
-const humanPrompt = useState("humanPrompt", () => "pigeon");
-
-const { data: response, execute } = await useAsyncData(
-  "joke",
-  () => $fetch("/api/joke/" + humanPrompt.value),
-  {
-    immediate: false,
-  }
-);
+const route = useRoute();
+const { response, execute } = await useRunPage(route);
 </script>

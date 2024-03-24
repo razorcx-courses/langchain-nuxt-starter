@@ -20,13 +20,15 @@
 </template>
 
 <script setup>
-useState('chatWindowTitle', () => "Json Output Parser Example");
-useState('chatWindowDesciption', () =>"Tell a Joke about {topic}");
-const humanPrompt = useState("humanPrompt", () => "LLMs");
+const route = useRoute();
+const page = computed(() => {
+  return route.params.slug.toLowerCase();
+});
+const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const { data: response, execute } = await useAsyncData(
-  "jsonparser",
-  () => $fetch('/api/jsonoutput/' + humanPrompt.value),
+  page.value,
+  () => $fetch(endpoint + humanPrompt.value),
   {
     immediate: false,
   }

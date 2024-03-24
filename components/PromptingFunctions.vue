@@ -5,15 +5,6 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Prompting with Functions Example");
-useState("chatWindowDesciption", () => "Tell a joke");
-const humanPrompt = useState("humanPrompt", () => "funny");
-
-const { data: response, execute } = await useAsyncData(
-  "functions",
-  () => $fetch("/api/promptfunctions/" + humanPrompt.value),
-  {
-    immediate: false,
-  }
-);
+const route = useRoute();
+const { response, execute } = await useRunPage(route);
 </script>

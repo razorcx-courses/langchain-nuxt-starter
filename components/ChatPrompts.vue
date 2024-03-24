@@ -5,14 +5,16 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Chat Prompt Template Example");
-useState("chatWindowDesciption", () => "Convert text from English to Spanish");
-const humanPrompt = useState("humanPrompt", () => "Hello my name is Chucky.");
+const route = useRoute();
+const page = computed(() => {
+  return route.params.slug.toLowerCase();
+});
+const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const { data: response, execute } = await useAsyncData(
-  "chatprompts",
+  page.value,
   () =>
-    $fetch("/api/chatprompts/convert", {
+    $fetch(endpoint, {
       query: {
         input_language: "english",
         output_language: "spanish",

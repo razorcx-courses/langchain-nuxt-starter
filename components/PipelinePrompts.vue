@@ -5,17 +5,16 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Pipeline Prompt Template Example");
-useState("chatWindowDesciption", () => "Ask a question");
-const humanPrompt = useState(
-  "humanPrompt",
-  () => "What's your favorite social media site?"
-);
+const route = useRoute();
+const page = computed(() => {
+  return route.params.slug.toLowerCase();
+});
+const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const { data: response, execute } = await useAsyncData(
-  "pipeline",
+  page.value,
   () =>
-    $fetch("/api/pipeline/ask", {
+    $fetch(endpoint, {
       query: {
         human: humanPrompt.value,
       },

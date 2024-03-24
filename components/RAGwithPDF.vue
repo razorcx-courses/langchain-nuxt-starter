@@ -29,21 +29,20 @@
 <script setup>
 import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
-useState("chatWindowTitle", () => "RAG - PDF Document Memory Vector Store");
-useState("chatWindowDesciption", () => "Ask questions about the PDF document");
-const humanPrompt = useState(
-  "humanPrompt",
-  () => "Tell me about the document."
-);
+const route = useRoute();
+const page = computed(() => {
+  return route.params.slug.toLowerCase();
+});
+const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const file = ref(null);
 
 const docs = ref();
 
 const { data: response, execute } = await useAsyncData(
-  "joke",
+  page.value,
   () =>
-    $fetch("/api/rag/pdf", {
+    $fetch(endpoint, {
       method: "POST",
       body: { docs: docs.value, prompt: humanPrompt.value },
     }),

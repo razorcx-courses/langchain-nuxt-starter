@@ -13,13 +13,15 @@
 </template>
 
 <script setup>
-useState("chatWindowTitle", () => "Simple Prompt Template Example");
-useState("chatWindowDesciption", () => "Company Name from {productType}");
-const humanPrompt = useState("humanPrompt", () => "toys");
+const route = useRoute();
+const page = computed(() => {
+  return route.params.slug.toLowerCase();
+});
+const { endpoint, humanPrompt } = usePageInit(page.value);
 
 const { data: response, execute } = await useAsyncData(
-  "company",
-  () => $fetch("/api/prompts/simple/" + humanPrompt.value),
+  page.value,
+  () => $fetch(endpoint + humanPrompt.value),
   {
     immediate: false,
     watch: [humanPrompt],
