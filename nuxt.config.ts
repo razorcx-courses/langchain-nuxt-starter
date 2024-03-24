@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       viewport: "width=device-width, initial-scale=1",
     },
   },
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss"],
   vite: {
     plugins: [
@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     upstashRedisRestToken: process.env.NUXT_UPSTASH_REDIS_REST_TOKEN,
     apiKey: process.env.NUXT_API_KEY,
     apiProxyBase: process.env.NUXT_API_PROXY_BASE,
-    
+
     // Keys within public, will be also exposed to the client-side
     public: {
       // apiProxyBase: process.env.NUXT_API_PROXY_BASE,  //this is the proxy url
@@ -40,4 +40,12 @@ export default defineNuxtConfig({
   //     proxy: process.env.PROXY_URL // 'http://localhost:8080/api/**' //cannot use this for runtime config
   //   }
   // }
+  nitro: {
+    storage: {
+      fs: {
+        driver: "fs",
+        base: "./uploads",
+      },
+    },
+  },
 });

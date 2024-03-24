@@ -51,8 +51,24 @@ const { data: response, execute } = await useAsyncData(
   }
 );
 
+//todo: check for file type is .pdf
+
 const readFile = async () => {
   const files = file.value.files;
+
+  //upload file to server
+  const formData = new FormData();
+  formData.append(
+    "file",
+    files[0],
+    files[0].name.replaceAll(" ", "-").toLocaleLowerCase()
+  );
+
+  await $fetch("/api/upload", {
+    method: "POST",
+    body: formData,
+  });
+
   console.log("Files", files);
   // Check if the user has selected a file
   if (files && files.length > 0) {
