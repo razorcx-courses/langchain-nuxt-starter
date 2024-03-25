@@ -1,9 +1,5 @@
 <template>
   <div>
-    <CompanyName :page="page"></CompanyName>
+    <CompanyName page="prompts"></CompanyName>
   </div>
 </template>
-
-<script setup>
-const page = ref("prompts");
-</script>

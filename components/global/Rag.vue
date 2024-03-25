@@ -27,18 +27,14 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  page: String,
-});
-
 const file = ref(null);
-
 const docs = ref();
+const page = "rag"
 
-const { endpoint, humanPrompt } = usePageInit(props.page);
+const { endpoint, humanPrompt } = usePageInit(page);
 
 const { data: response, execute } = await useAsyncData(
-  props.page,
+  page,
   () =>
     $fetch(endpoint, {
       method: "POST",

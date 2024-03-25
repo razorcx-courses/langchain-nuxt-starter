@@ -1,9 +1,5 @@
 <template>
   <div>
-    <SimplePrompts :page="page"></SimplePrompts>
+    <SimplePrompts page="simple"></SimplePrompts>
   </div>
 </template>
-
-<script setup>
-const page = ref("simple");
-</script>

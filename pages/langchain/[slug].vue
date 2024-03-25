@@ -1,15 +1,16 @@
 <template>
   <div>
-    <Joke v-if="showPage('joke')" :page="page"></Joke>
-    <ChatPrompts v-else-if="showPage('chatprompts')" :page="page"></ChatPrompts>
-    <CSVListOutputParser v-else-if="showPage('csvlist')" :page="page"></CSVListOutputParser>
-    <FewShotPrompts v-else-if="showPage('fewshot')" :page="page"></FewShotPrompts>
-    <JsonOutputParser v-else-if="showPage('jsonparser')" :page="page"></JsonOutputParser>
-    <PipelinePrompts v-else-if="showPage('pipeline')" :page="page"></PipelinePrompts>
+    <component v-if="showPage(page)" :is="page"></component>
+    <!-- <Joke v-if="showPage('joke')" page="joke"></Joke> -->
+    <!-- <ChatPrompts v-else-if="showPage('chatprompts')" page="chatprompts"></ChatPrompts>
+    <CSVListOutputParser v-else-if="showPage('csvlist')" page="csvlist"></CSVListOutputParser>
+    <FewShotPrompts v-else-if="showPage('fewshot')" page="fewshot"></FewShotPrompts>
+    <JsonOutputParser v-else-if="showPage('jsonparser')" page="jsonparser"></JsonOutputParser>
+    <PipelinePrompts v-else-if="showPage('pipeline')" page="pipeline"></PipelinePrompts>
     <PromptingFunctions
-      v-else-if="showPage('promptingfunctions')" :page="page"
+      v-else-if="showPage('promptingfunctions')" page="promptingfunctions"
     ></PromptingFunctions>
-    <RAGwithPDF v-else-if="showPage('rag')" :page="page"></RAGwithPDF>
+    <RAGwithPDF v-else-if="showPage('rag')" page="rag"></RAGwithPDF> -->
   </div>
 </template>
 
@@ -17,10 +18,12 @@
 const route = useRoute();
 
 const page = computed(() => {
+  console.log('page', route.params.slug.toLowerCase());
   return route.params.slug.toLowerCase();
 });
 
 const showPage = (index) => {
+  console.log('show page', page.value);
   return page.value === index.toLowerCase();
 };
 </script>

@@ -15,6 +15,15 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss"],
+  components: {
+    dirs: [
+      {
+        "path": "~/components/global",
+        "global": true
+      },
+      "~/components"
+    ]
+  },
   vite: {
     plugins: [
       topLevelAwait({

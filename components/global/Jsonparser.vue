@@ -1,5 +1,7 @@
 <template>
-  <ChatBox @getResponse="execute">
+  <ChatBox
+    @getResponse="execute"
+  >
     <template v-if="response">
       <p
         class="inline-flex text-[9px] bg-gray-400 text-gray-200 px-2 rounded-sm"
@@ -18,9 +20,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  page: String,
-});
+const page = "jsonparser"
 
-const { response, execute } = await useRunPage(props.page);
+const { response, execute } = await useRunPage(page);
 </script>

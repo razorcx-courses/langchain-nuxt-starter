@@ -5,14 +5,11 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  page: String,
-});
-
-const { endpoint, humanPrompt } = usePageInit(props.page);
+const page = "pipeline"
+const { endpoint, humanPrompt } = usePageInit(page);
 
 const { data: response, execute } = await useAsyncData(
-  props.page,
+  page,
   () =>
     $fetch(endpoint, {
       query: {

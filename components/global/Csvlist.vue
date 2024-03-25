@@ -5,9 +5,6 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  page: String,
-});
-
-const { response, execute } = await useRunPage(props.page);
+const page = "csvlist"
+const { response, execute } = await useRunPage(page);
 </script>

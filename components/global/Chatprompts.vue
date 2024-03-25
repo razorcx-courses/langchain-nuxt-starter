@@ -5,18 +5,17 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  page: String,
-});
-
-const { endpoint, humanPrompt } = usePageInit(props.page);
+const page = "chatprompts"
+const { endpoint, humanPrompt } = usePageInit(page);
 
 const { data: response, execute } = await useAsyncData(
-  props.page,
+  page,
   () =>
     $fetch(endpoint, {
       query: {
-        human: humanPrompt.value,
+        input_language: "english",
+        output_language: "spanish",
+        text: humanPrompt.value,
       },
     }),
   {
