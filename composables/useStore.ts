@@ -1,5 +1,8 @@
 export const useTitle = () => {
-  return useState<string>("chatWindowTitle", () => "Langchain | Nuxt | TailwindCSS");
+  return useState<string>(
+    "chatWindowTitle",
+    () => "Langchain | Nuxt | TailwindCSS"
+  );
 };
 
 export const useDescription = () => {
@@ -12,4 +15,12 @@ export const useHumanPrompt = () => {
 
 export const usePageMeta = () => {
   return useState<IPageInfo[]>("pageMeta", () => pageInfos);
+};
+
+export const useLoggedIn = () => {
+  return useState<boolean>("isLoggedIn", () => false);
+};
+
+export const useSignUp = () => {
+  return useState<boolean>("isSignUp", () => false);
 };
