@@ -1,5 +1,5 @@
 <template>
-  <div id="prompt" class="bg-black text-sm p-3 flex flex-col rounded-b-sm">
+  <div id="prompt" class="text-sm p-3 flex flex-col rounded-b-sm">
     <div
       class="text-xs text-gray-800 flex justify-left items-center rounded-t-sm overflow-hidden"
     >
