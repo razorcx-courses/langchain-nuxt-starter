@@ -1,8 +1,8 @@
 <template>
-  <div class="relative font-mono bg-black min-h-screen">
+  <div class="relative font-mono">
     <NuxtLoadingIndicator />
     <NuxtLayout>
-      <NuxtPage />
+      <NuxtPage /> 
     </NuxtLayout>
   </div>
 </template>
@@ -12,7 +12,7 @@ useHead({
   title: "LangChain chatterBox Tutorials",
   meta: [{ name: "description", content: "LangChain chatterBox Tutorials" }],
   // bodyAttrs: {
-  //   class: "test",
+  //   class: "bg-red-200",
   // },
   // script: [{ innerHTML: "console.log('Hello world')" }],
   link: [
@@ -27,20 +27,4 @@ useHead({
     },
   ],
 });
-
-useState("pages", () => [
-  {
-    name: "chatprompts",
-    chatWindowTitle: "Chat Prompt Template Example",
-    chatWindowDesciption: "Convert text from English to Spanish",
-    humanPrompt: "Hello my name is Chucky.",
-    apiEndpoint: "/api/chatprompts/convert",
-    query: {
-      input_language: "english",
-      output_language: "spanish",
-      text: "",
-    },
-    immediate: false,
-  },
-]);
 </script>
