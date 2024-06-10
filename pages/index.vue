@@ -16,7 +16,7 @@
         class="flex flex-col rounded-md overflow-hidden gap-6"
       >
         <ChatBoxTitle></ChatBoxTitle>
-        <div class="flex flex-col gap-2 bg-black/80 p-6 rounded-lg grow">
+        <div class="flex flex-col gap-2 bg-white/20 p-6 rounded-lg grow">
           <template v-for="link in links" :key="link.name">
             <div class="flex items-center justify-center cursor-pointer">
               <NuxtLink class="text-white hover:text-pink-400" :to="link.to"
