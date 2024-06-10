@@ -5,7 +5,7 @@ import topLevelAwait from "vite-plugin-top-level-await";
 
 export default defineNuxtConfig({
 
-  //todo: add build/prod/etc app settings
+  //todo: add build/prod/run app settings
   
   app: {
     head: {
@@ -22,6 +22,11 @@ export default defineNuxtConfig({
         "global": true
       },
       "~/components"
+    ]
+  },
+  imports: {
+    dirs: [
+      './stores'
     ]
   },
   vite: {
@@ -60,9 +65,4 @@ export default defineNuxtConfig({
       },
     },
   },
-  imports: {
-    dirs: [
-      './stores'
-    ]
-  }
 });
