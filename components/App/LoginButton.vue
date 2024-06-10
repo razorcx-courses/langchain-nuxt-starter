@@ -10,7 +10,7 @@
     <button
       v-if="isSignUp"
       class="flex justify-center items-center bg-pink-400 py-1 px-3 rounded-sm"
-      @click="(isLoggedIn = true) && (isSignUp = false)"
+      @click="(isLoggedIn = isSignUp = false)"
     >
       <span>LOGIN</span>
     </button>
