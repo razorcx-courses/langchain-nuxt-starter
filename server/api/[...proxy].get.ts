@@ -1,6 +1,8 @@
 import { getProxyUrl } from "../lib/proxyUrl";
 
 export default defineEventHandler(async (event) => {
+  console.log(getRouterParam(event, "proxy"));
+
   const { targetUrl } = getProxyUrl(event);
 
   const { apiKey } = useRuntimeConfig(event);
@@ -12,7 +14,7 @@ export default defineEventHandler(async (event) => {
   console.log(apiKey, targetUrl.toString());
 
   const res = await proxyRequest(event, targetUrl.toString());
-  
+
   //const res = await $fetch(targetUrl.toString())
   return res;
 });
