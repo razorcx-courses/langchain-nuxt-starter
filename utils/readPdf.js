@@ -13,12 +13,6 @@ export const readPdfFile = async (files) => {
     file,
     file.name.replaceAll(" ", "-").toLocaleLowerCase()
   );
-
-  await $fetch("/api/upload", {
-    method: "POST",
-    body: formData,
-  });
-
   // Check if the user has selected a file
   console.log("Document loaded");
 
