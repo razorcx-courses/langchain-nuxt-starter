@@ -9,7 +9,7 @@ const page = "fewshot"
 
 const { endpoint, humanPrompt } = usePageInit(page);
 
-const { data: response, execute } = await useAsyncData(
+const { data: response, execute } = useAsyncData(
   page,
   () =>
     $fetch(endpoint, {
@@ -18,7 +18,7 @@ const { data: response, execute } = await useAsyncData(
       },
     }),
   {
-    immediate: false,
+    immediate: false,   //do not run on load.  wait for execute command
   }
 );
 </script>

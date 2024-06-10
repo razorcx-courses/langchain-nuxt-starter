@@ -33,7 +33,7 @@ const page = "rag"
 
 const { endpoint, humanPrompt } = usePageInit(page);
 
-const { data: response, execute } = await useAsyncData(
+const { data: response, execute } = useAsyncData(
   page,
   () =>
     $fetch(endpoint, {
@@ -46,6 +46,8 @@ const { data: response, execute } = await useAsyncData(
 );
 
 const readFile = async () => {
+  // console.log("readfile", file.value.files)
   docs.value = await readPdfFile(file.value.files);
+  // console.log(endpoint, docs.value)
 };
 </script>

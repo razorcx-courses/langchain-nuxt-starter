@@ -2,7 +2,7 @@
   <ChatBox @getResponse="execute">
     <template v-if="response">
       <div>
-        <p class="font-bold text-lg">useFetch Example</p>
+        <p class="font-bold text-lg">useAsyncData Example</p>
         <p class="text-bold text-pink-500 ml-2">{{ response.input }}</p>
         <p class="text-xs ml-2">Last fetched: {{ response.fetchedAt }}</p>
       </div>
@@ -17,7 +17,7 @@ const props = defineProps({
 
 const { endpoint, humanPrompt } = usePageInit(props.page);
 
-const { data: response, execute } = await useAsyncData(
+const { data: response, execute } = useAsyncData(
   props.page,
   () => $fetch(endpoint + humanPrompt.value),
   {

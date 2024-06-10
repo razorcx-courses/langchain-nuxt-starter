@@ -8,7 +8,7 @@
 const page = "pipeline"
 const { endpoint, humanPrompt } = usePageInit(page);
 
-const { data: response, execute } = await useAsyncData(
+const { data: response, execute } = useAsyncData(
   page,
   () =>
     $fetch(endpoint, {
