@@ -62,7 +62,8 @@ const arrayBufferToBase64 = (buffer) => {
 const readFile = async () => {
 
   response.value = ""
-
+  humanPrompt.value = "What is this document about?"
+  
   const theFile = file.value.files[0];
   console.log(theFile);
 
@@ -70,7 +71,6 @@ const readFile = async () => {
 
   reader.onload = async (f) => {
     const arrayBuffer = f.target.result;
-    const uint8Array = new Uint8Array(arrayBuffer);
 
     // Create a root reference
     const path = "pdfs/" + theFile.name;
@@ -81,18 +81,10 @@ const readFile = async () => {
 
     console.log("Uploaded a blob or file!", snapshot.metadata.fullPath);
 
-    // Convert Uint8Array to Base64
-    const base64String = arrayBufferToBase64(uint8Array);
-
     const body = await $fetch("/api/read-pdf", {
       method: "POST",
       body: { path: path },
     });
-
-    // const body = await $fetch("/api/read-pdf", {
-    //   method: "POST",
-    //   body: { data: base64String },
-    // });
 
     const doc = body.join(" ");
     console.log(doc.substr(0, 200));
