@@ -20,8 +20,8 @@ const parsePdf = (arrayBuffer) => {
       if (err) {
         console.error("error:", err);
         reject(err);
-      } else if (item.text) {
-        console.log(item.text, item.text.length);
+      } else if (item?.text) {
+        // console.log(item.text, item.text.length);
         array.push(item.text);
         resolve(array);
       }
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
     console.log(path);
 
     const arrayBuffer = await getBytes(ref2(storage, path));
-    // console.log(arrayBuffer);
+    console.log("Buffer length: ", arrayBuffer.byteLength);
 
     const response = await parsePdf(arrayBuffer);
     return response;

@@ -9,8 +9,8 @@ const isLoggedIn = useLoggedIn();
 const isSignUp = useSignUp();
 
 watch([isLoggedIn, isSignUp], () => {
-  console.log("IsLoggedIn", isLoggedIn.value);
-  console.log("isSignUp", isSignUp.value);
+  // console.log("IsLoggedIn", isLoggedIn.value);
+  // console.log("isSignUp", isSignUp.value);
 
   if (!isLoggedIn.value || !isSignUp.value) navigateTo("/");
 });

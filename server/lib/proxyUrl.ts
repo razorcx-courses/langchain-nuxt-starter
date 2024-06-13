@@ -1,6 +1,6 @@
 export const getProxyUrl = (event: any) => {
   const { apiProxyBase } = useRuntimeConfig(event);
-  console.log("apiProxyBase", apiProxyBase);
+  console.log("API Proxy Base URL:", apiProxyBase);
   
   const path = getRouterParam(event, "proxy");
   const url = getRequestURL(event);
@@ -11,7 +11,7 @@ export const getProxyUrl = (event: any) => {
   // Ensure there are no double slashes (other than the http:// part)
   const targetUrl = new URL(target.replace(/([^:]\/)\/+/g, "$1"));
 
-  console.log({ url, params: event.context.params, path, target });
+  // console.log({ url, params: event.context.params, path, target });
 
   return { targetUrl };
 };

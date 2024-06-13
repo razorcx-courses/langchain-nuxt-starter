@@ -1,8 +1,8 @@
 <template>
   <template v-for="item in items" :key="item.title">
-    <NuxtLink :to="item.to" v-if="item.to">
+    <a :href="item.to" v-if="item.to" target="_blank" rel="noopener">
       {{ item.title }}
-    </NuxtLink>
+    </a>
     <p v-else>{{ item.title }}</p>
   </template>
 </template>
