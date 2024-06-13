@@ -27,9 +27,9 @@
 </template>
 
 <script setup>
-const file = ref(null);
+const file = ref();
 const docs = ref();
-const page = "rag"
+const page = "rag";
 
 const { endpoint, humanPrompt } = usePageInit(page);
 
@@ -45,9 +45,40 @@ const { data: response, execute } = useAsyncData(
   }
 );
 
+const arrayBufferToBase64 = (buffer) => {
+  let binary = "";
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
+}
+
 const readFile = async () => {
-  // console.log("readfile", file.value.files)
-  docs.value = await readPdfFile(file.value.files);
-  // console.log(endpoint, docs.value)
+  const theFile = file.value.files[0];
+  console.log(theFile);
+
+  const reader = new FileReader();
+
+  reader.onload = async (f) => {
+    const arrayBuffer = f.target.result;
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    // Convert Uint8Array to Base64
+    const base64String = arrayBufferToBase64(uint8Array);
+
+    const body = await $fetch("/api/read-pdf", {
+      method: "POST",
+      body: { data: base64String },
+    });
+
+    const doc = body.join(" ")
+    console.log(doc.substr(0, 200));
+
+    docs.value = doc;
+  };
+
+  reader.readAsArrayBuffer(theFile);
 };
 </script>
