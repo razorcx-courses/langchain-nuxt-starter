@@ -27,6 +27,9 @@
 </template>
 
 <script setup>
+import { uploadBytes, getDownloadURL  } from "firebase/storage";
+import { ref as ref2 } from "firebase/storage";
+
 const file = ref();
 const docs = ref();
 const page = "rag";
@@ -48,14 +51,18 @@ const { data: response, execute } = useAsyncData(
 const arrayBufferToBase64 = (buffer) => {
   let binary = "";
   const bytes = new Uint8Array(buffer);
+
   const len = bytes.byteLength;
   for (let i = 0; i < len; i++) {
     binary += String.fromCharCode(bytes[i]);
   }
   return window.btoa(binary);
-}
+};
 
 const readFile = async () => {
+
+  response.value = ""
+
   const theFile = file.value.files[0];
   console.log(theFile);
 
@@ -65,15 +72,29 @@ const readFile = async () => {
     const arrayBuffer = f.target.result;
     const uint8Array = new Uint8Array(arrayBuffer);
 
+    // Create a root reference
+    const path = "pdfs/" + theFile.name;
+    const storageRef = ref2(storage, path);
+
+    // 'file' comes from the Blob or File API
+    const snapshot = await uploadBytes(storageRef, arrayBuffer);
+
+    console.log("Uploaded a blob or file!", snapshot.metadata.fullPath);
+
     // Convert Uint8Array to Base64
     const base64String = arrayBufferToBase64(uint8Array);
 
     const body = await $fetch("/api/read-pdf", {
       method: "POST",
-      body: { data: base64String },
+      body: { path: path },
     });
 
-    const doc = body.join(" ")
+    // const body = await $fetch("/api/read-pdf", {
+    //   method: "POST",
+    //   body: { data: base64String },
+    // });
+
+    const doc = body.join(" ");
     console.log(doc.substr(0, 200));
 
     docs.value = doc;
