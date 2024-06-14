@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { uploadBytes, getDownloadURL  } from "firebase/storage";
+import { uploadBytes } from "firebase/storage";
 import { ref as ref2 } from "firebase/storage";
 
 const file = ref();
@@ -48,22 +48,10 @@ const { data: response, execute } = useAsyncData(
   }
 );
 
-const arrayBufferToBase64 = (buffer) => {
-  let binary = "";
-  const bytes = new Uint8Array(buffer);
-
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return window.btoa(binary);
-};
-
 const readFile = async () => {
+  response.value = "";
+  humanPrompt.value = `Take notes on the following document. The goal is to be able to create a complete understanding of the document after reading all notes which includes a description for each major item.`;
 
-  response.value = ""
-  humanPrompt.value = "What is this document about?"
-  
   const theFile = file.value.files[0];
   console.log(theFile);
 
